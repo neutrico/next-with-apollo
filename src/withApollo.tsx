@@ -49,6 +49,7 @@ export default function withApollo<TCache = any>(
         const getInitialProps = App.getInitialProps;
 
         let appProps = { pageProps: {} };
+        let errors = {}
 
         console.log("next-with-apollo", appProps)
 
@@ -76,6 +77,7 @@ export default function withApollo<TCache = any>(
               />
             );
           } catch (error) {
+            errors = {...error}
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             if (process.env.NODE_ENV !== 'production') {
               // tslint:disable-next-line no-console This is a necessary debugging log
@@ -93,6 +95,7 @@ export default function withApollo<TCache = any>(
         }
 
         return {
+          ...errors,
           ...appProps,
           apolloState
         };
