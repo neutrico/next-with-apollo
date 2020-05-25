@@ -50,6 +50,8 @@ export default function withApollo<TCache = any>(
 
         let appProps = { pageProps: {} };
 
+        console.log("next-with-apollo", appProps)
+
         if (getInitialProps) {
           ctx.apolloClient = apollo;
           appProps = await getInitialProps(appCtx);
